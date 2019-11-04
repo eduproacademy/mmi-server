@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.post('/contact-us', (req, res) => {
-    const { userName, userEmail, userSubject, userPhone, userMessage } = req.body;
+    const { emailCompany, toCompanyEmail, userName, userEmail, userSubject, userPhone, userMessage } = req.body;
 
     const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -24,15 +24,15 @@ app.post('/contact-us', (req, res) => {
     });
 
     const mailOptions = {
-        from: "noreply@majumaritim.com",
-        to: "hello@majumaritim.com",
-        subject: `${userSubject} ${userName} ${userEmail}`,
+      from: `${emailCompany}`,
+      to: `${toCompanyEmail}`,
+      subject: `${userSubject} - ${userName} ${userEmail}`,
         html: `
         <head>
             <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
         </head>
         <body style='font-family:Verdana;background:#f2f2f2;color:#606060;'>
-        
+
             <style>
                 h3 {
                     font-weight: normal;
@@ -49,14 +49,14 @@ app.post('/contact-us', (req, res) => {
                     font-size: 14px;
                 }
             </style>
-        
+
             <table cellpadding='0' width='100%' cellspacing='0' border='0'>
                 <tr>
                     <td>
                         <table cellpadding='0' cellspacing='0' border='0' align='center' width='100%' style='border-collapse:collapse;'>
                             <tr>
                                 <td>
-        
+
                                     <div>
                                         <table cellpadding='0' cellspacing='0' border='0' align='center'  style='width: 100%;max-width:600px;background:#FFFFFF;margin:0 auto;border-radius:5px;padding:50px 30px'>
                                             <tr>
@@ -115,7 +115,7 @@ app.post('/contact-us', (req, res) => {
                                             </tr>
                                         </table>
                                     </div>
-        
+
                                     <div style='margin-top:30px;text-align:center;color:#b3b3b3'>
                                         <p style='font-size:12px;'>2019 Maju Maritim Indonesia®, All Rights Reserved.</p>
                                     </div>
